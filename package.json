@@ -1,0 +1,43 @@
+{
+  "name": "workspace",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@8.12.1",
+  "description": "Practical React monorepo",
+  "author": "Nándor Dudás <nandor.dudas@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "scripts": {
+    "dedupe": "pnpm dedupe --check || pnpm dedupe",
+    "lint": "eslint --cache --report-unused-disable-directives --max-warnings 0",
+    "prepare": "npx simple-git-hooks",
+    "upgrade": "taze minor -wIr"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.4.6",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@total-typescript/ts-reset": "^0.5.1",
+    "@tsconfig/strictest": "^2.0.2",
+    "@types/node": "^20.10.4",
+    "eslint": "^8.56.0",
+    "lint-staged": "^15.2.0",
+    "pnpm": "^8.12.1",
+    "simple-git-hooks": "^2.9.0",
+    "taze": "^0.13.0",
+    "typescript": "^5.3.3"
+  },
+  "commitlint": {
+    "extends": "@commitlint/config-conventional"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "pnpm exec commitlint --edit ${1}",
+    "pre-commit": "pnpm exec lint-staged --concurrent false"
+  },
+  "lint-staged": {
+    "*": "eslint --cache --fix"
+  }
+}
